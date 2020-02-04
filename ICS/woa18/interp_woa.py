@@ -50,7 +50,7 @@ vars = {'n_an': {'SFILE': 'woa18_nitrate_extracted_mean.nc',
      
 t = 'snr' if data['STIMEVAR']=='missing_rec' else data['STIMEVAR']
 
-interp_dir='/work/n01/n01/dapa/INTERP/BGC/interp-files'
+interp_dir='../interp-files'
 domain_file='/work/n01/n01/dapa/INTERP/BGC/'+data['DOMAIN']
 
 #LINK TO FILES
