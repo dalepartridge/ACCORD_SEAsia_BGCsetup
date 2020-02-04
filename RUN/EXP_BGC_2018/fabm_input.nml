@@ -1,0 +1,49 @@
+!              !  file name   ! frequency (hours) ! variable  ! time interp. !  clim  ! 'yearly'/ ! weights  ! rotation ! land/sea mask !
+!              !              !  (if <0  months)  !   name    !   (logical)  !  (T/F) ! 'monthly' ! filename ! pairing  ! filename      !
+&variable
+   name='gelbstoff_absorption_satellite'
+   sn=         '/work/n01/n01/dapa/ACCORD/BGC-INPUTS/SBC/ady.nc',368,'gelbstoff_absorption_satellite', .true.,  .true.,   'yearly',     '',         '',        ''
+/
+&variable
+   name='N3_flux/flux'
+   sn=         '/work/n01/n01/dapa/ACCORD/BGC-INPUTS/SBC/Ndep.nc',-12,'N3_flux', .false.,  .true.,   'yearly',     '',         '',        ''
+/
+&variable
+   name='N4_flux/flux'
+   sn=         '/work/n01/n01/dapa/ACCORD/BGC-INPUTS/SBC/Ndep.nc',-12,'N4_flux', .false.,  .true.,   'yearly',     '',         '',        ''
+/
+&riverdata
+   name='N3_n'
+   sn=          '/work/n01/n01/jenjar93/accord/rivers/rivers_clim_v2.nc',-1,'DINrunoff', .true.,  .true.,   'yearly',     '',         '',        ''
+   rfac=71.4 ! 1000./14.0067 (g/s -> mmol/s)
+/
+&riverdata
+   name='N1_p'
+   sn=         '/work/n01/n01/jenjar93/accord/rivers/rivers_clim_v2.nc',-1,'DIPrunoff', .true.,  .true.,   'yearly',     '',         '',        ''
+   rfac=32.3 ! 1000./30.9738 (g/s -> mmol/s)
+/
+&riverdata
+   name='N5_s'
+   sn=         '/work/n01/n01/jenjar93/accord/rivers/rivers_clim_v2.nc',-1,'DSirunoff', .true.,  .true.,   'yearly',     '',         '',        ''
+   rfac=35.6 ! 1000./28.0855 (g/s -> mmol/s)
+/
+!&riverdata
+!   name='N4_n'
+!   sn=         '/work/n01/n01/jenjar93/accord/rivers/rivers_clim_v2.nc',-1,'ronh4', .true.,  .true.,   'yearly',     '',         '',        ''
+!   rfac=71.4 ! 1000./14.0067 (g/s -> mmol/s)
+!/
+!&riverdata
+!   name='O3_c'
+!   sn=         '/work/n01/n01/jenjar93/accord/rivers/rivers_clim_v2.nc',-1,'rodic', .true.,  .true.,   'yearly',     '',         '',        ''
+!   rfac=83.3 ! 1000./12.011 (g/s -> mmol/s)
+!/
+!&riverdata
+!   name='O2_o'
+!   sn=         '/work/n01/n01/jenjar93/accord/rivers/rivers_clim_v2.nc',-1,'roo', .true.,  .true.,   'yearly',     '',         '',        ''
+!   rfac=62.5 ! 1000./15.9994 (g/s -> mmol/s)
+!/
+!&riverdata
+!   name='O3_bioalk'
+!   sn=         '/work/n01/n01/jenjar93/accord/rivers/rivers_clim_v2.nc',-1,'robioalk', .true.,  .true.,   'yearly',     '',         '',        ''
+!   rfac=0.00098 ! 1./1020. (umol/s -> umol/s*m3/kg)
+!/
