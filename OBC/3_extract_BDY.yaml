@@ -1,0 +1,135 @@
+#
+#this file contains the information needed by the script extract_BDY.py
+#
+#meshfile: is the file containing the MESH information about the NEMO domain grid
+#coordsfile: is the file containing the information about the BDY point of the boundary we want to extract
+#y0: is the beginning of the simulation period
+#y1: is the end of the simulation period
+#njobs: is the number of processors to be used in some of the calculation
+#       to run the script fully in serial mode put -1
+#variables: list of the variables that need to be extracted
+#           for each variable a set of inromation need to be specified:
+#           ESM_file: the file containing the ESM timeseries
+#           ESM_bias: bias to apply to the ESM data (the bias is SUBTRACTED to the data)
+#           ESM_scale: the scaling factor to be applied to the ESM data (the data are MULTIPLIED by the scale)
+#           WOA_file: the file containing the reference timeseries
+#           WOA_bias: bias to apply to the reference data (the bias is SUBTRACTED to the data)
+#           WOA_scale: the scaling factor to be applied to the reference data (the data are MULTIPLIED by the scale)
+#           output_file: is the root of the files where the BDY will be saved. 
+#                        the bdy will be saved in separate monthly files appending _y????m??.nc
+#           time_shift: in case the model data start from a month that is different from January (e.g. HadGEM2 calculates annual mean from December to Novemeber)
+#                       then the difference need to be specified here as in model-reference. 
+#                       E.g. if the annual mean in the BGC ESM model output starts in December time_shift=-1, if it starts in February time_shift=1
+
+meshfile: /data/sthenno1/scratch/dapa/ACCORD/bdy/hadgem-coordinates/bdy_gdept_hadgem.nc #grid/mesh_mask.nc
+coordsfile: /data/sthenno1/scratch/dapa/ACCORD/bdy/hadgem-coordinates/coordinates.bdy.nc
+y0: 1980
+y1: 2099
+njobs: 8
+grid: T
+variables:
+   NO3:
+       ESM_file: /data/sthenno1/scratch/dapa/ACCORD/bdy/raw_data/DIN_interp.nc
+       output_file: /data/sthenno1/scratch/dapa/ACCORD/bdy/hadgem-data/accord_bdytrc
+   O2:
+       ESM_file: /data/sthenno1/scratch/dapa/ACCORD/bdy/raw_data/OXY_interp.nc 
+       output_file: /data/sthenno1/scratch/dapa/ACCORD/bdy/hadgem-data/accord_bdytrc
+   Si:
+       ESM_file: /data/sthenno1/scratch/dapa/ACCORD/bdy/raw_data/SIL_interp.nc
+       output_file: /data/sthenno1/scratch/dapa/ACCORD/bdy/hadgem-data/accord_bdytrc
+   DIC:
+       ESM_file: /data/sthenno1/scratch/dapa/ACCORD/bdy/raw_data/DIC_interp.nc
+       output_file: /data/sthenno1/scratch/dapa/ACCORD/bdy/hadgem-data/accord_bdytrc
+   TA: 
+       ESM_file: /data/sthenno1/scratch/dapa/ACCORD/bdy/raw_data/ALK_interp.nc
+       output_file: /data/sthenno1/scratch/dapa/ACCORD/bdy/hadgem-data/accord_bdytrc
+   R2_c:
+       output_file: /data/sthenno1/scratch/dapa/ACCORD/bdy/hadgem-data/accord_bdytrc
+       fixed_value: 60.
+   R3_c:
+       output_file: /data/sthenno1/scratch/dapa/ACCORD/bdy/hadgem-data/accord_bdytrc
+       fixed_value: 60.
+   small_poc:
+       output_file: /data/sthenno1/scratch/dapa/ACCORD/bdy/hadgem-data/accord_bdytrc
+       fixed_value: .0033
+   small_pon:
+       output_file: /data/sthenno1/scratch/dapa/ACCORD/bdy/hadgem-data/accord_bdytrc
+       fixed_value: 4.158e-5
+   small_pop:
+       output_file: /data/sthenno1/scratch/dapa/ACCORD/bdy/hadgem-data/accord_bdytrc
+       fixed_value: 2.5938e-6
+   medium_poc:
+       output_file: /data/sthenno1/scratch/dapa/ACCORD/bdy/hadgem-data/accord_bdytrc
+       fixed_value: .0033
+   medium_pon:
+       output_file: /data/sthenno1/scratch/dapa/ACCORD/bdy/hadgem-data/accord_bdytrc
+       fixed_value: 4.158e-5
+   medium_pop:
+       output_file: /data/sthenno1/scratch/dapa/ACCORD/bdy/hadgem-data/accord_bdytrc
+       fixed_value: 2.5938e-6
+   medium_pos:
+       output_file: /data/sthenno1/scratch/dapa/ACCORD/bdy/hadgem-data/accord_bdytrc
+       fixed_value: 3.8879e-5
+   large_poc:
+       output_file: /data/sthenno1/scratch/dapa/ACCORD/bdy/hadgem-data/accord_bdytrc
+       fixed_value: .0033
+   large_pon:
+       output_file: /data/sthenno1/scratch/dapa/ACCORD/bdy/hadgem-data/accord_bdytrc
+       fixed_value: 4.158e-5
+   large_pop:
+       output_file: /data/sthenno1/scratch/dapa/ACCORD/bdy/hadgem-data/accord_bdytrc
+       fixed_value: 2.5938e-6
+   large_pos:
+       output_file: /data/sthenno1/scratch/dapa/ACCORD/bdy/hadgem-data/accord_bdytrc
+       fixed_value: 3.8879e-5
+   microphytoplankton_n:
+       output_file: /data/sthenno1/scratch/dapa/ACCORD/bdy/hadgem-data/accord_bdytrc
+       fixed_value: 1.26e-6
+   microphytoplankton_p:
+       output_file: /data/sthenno1/scratch/dapa/ACCORD/bdy/hadgem-data/accord_bdytrc
+       fixed_value: 7.86e-8
+   microphytoplankton_c:
+       output_file: /data/sthenno1/scratch/dapa/ACCORD/bdy/hadgem-data/accord_bdytrc
+       fixed_value: .0001
+   microphytoplankton_Chl:
+       output_file: /data/sthenno1/scratch/dapa/ACCORD/bdy/hadgem-data/accord_bdytrc
+       fixed_value: .0001
+   diatoms_n:
+       output_file: /data/sthenno1/scratch/dapa/ACCORD/bdy/hadgem-data/accord_bdytrc
+       fixed_value: 1.26e-6
+   diatoms_p:
+       output_file: /data/sthenno1/scratch/dapa/ACCORD/bdy/hadgem-data/accord_bdytrc
+       fixed_value: 7.86e-8
+   diatoms_c:
+       output_file: /data/sthenno1/scratch/dapa/ACCORD/bdy/hadgem-data/accord_bdytrc
+       fixed_value: .0001
+   diatoms_Chl:
+       output_file: /data/sthenno1/scratch/dapa/ACCORD/bdy/hadgem-data/accord_bdytrc
+       fixed_value: .0001
+   diatoms_s:
+       output_file: /data/sthenno1/scratch/dapa/ACCORD/bdy/hadgem-data/accord_bdytrc
+       fixed_value: 1.18e-6
+   nanophytoplankton_n:
+       output_file: /data/sthenno1/scratch/dapa/ACCORD/bdy/hadgem-data/accord_bdytrc
+       fixed_value: 1.26e-6
+   nanophytoplankton_p:
+       output_file: /data/sthenno1/scratch/dapa/ACCORD/bdy/hadgem-data/accord_bdytrc
+       fixed_value: 7.86e-8
+   nanophytoplankton_c:
+       output_file: /data/sthenno1/scratch/dapa/ACCORD/bdy/hadgem-data/accord_bdytrc
+       fixed_value: .0001
+   nanophytoplankton_Chl:
+       output_file: /data/sthenno1/scratch/dapa/ACCORD/bdy/hadgem-data/accord_bdytrc
+       fixed_value: .0001
+   picophytoplankton_n:
+       output_file: /data/sthenno1/scratch/dapa/ACCORD/bdy/hadgem-data/accord_bdytrc
+       fixed_value: 1.26e-6
+   picophytoplankton_p:
+       output_file: /data/sthenno1/scratch/dapa/ACCORD/bdy/hadgem-data/accord_bdytrc
+       fixed_value: 7.86e-8
+   picophytoplankton_c:
+       output_file: /data/sthenno1/scratch/dapa/ACCORD/bdy/hadgem-data/accord_bdytrc
+       fixed_value: .0001
+   picophytoplankton_Chl:
+       output_file: /data/sthenno1/scratch/dapa/ACCORD/bdy/hadgem-data/accord_bdytrc
+       fixed_value: .0001

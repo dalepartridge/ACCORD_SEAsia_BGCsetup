@@ -1,14 +1,15 @@
-module unload cray-netcdf-hdf5parallel cray-hdf5-parallel
-module load cray-netcdf cray-hdf5
-module load nco/4.5.0
+#!usr/bin/bash
 
-var=$1
-sfile=$2
-sourceid=$3
-stime=$4
+###############################################
+# interp_IC_initial.sh
+# This script will perform single interpolation for a variable 
+# with a single time record, for the first variable from a source
+###############################################
 
-SOSIEDIR=/home/n01/n01/dapa/code/git/sosie/bin/
-SCRIPDIR=/work/n01/n01/annkat/SEAsia_ERSEM_R12/NEMO_ERSEM_CMEMS/trunk_NEMOGCM_r8395/TOOLS/WEIGHTS/BLD/bin/
+var=$1       #Input variable name
+sfile=$2     #Source file
+sourceid=$3  #Source ID Tag
+stime=$4     #Source time variable
 
 # Fill land mask with zeros
 ncatted -a _FillValue,$var,m,f,0 $sfile
@@ -33,5 +34,5 @@ ncrename -v $var,mask sosie_initcd_mask.nc
 ncap2 -O -s 'where(mask>=0) mask=1' sosie_initcd_mask.nc sosie_initcd_mask.nc
 
 # Fill values
-/home/n01/n01/dapa/code/git/sosie/bin/sosie3.x -f 3_initcd_${sourceid}_to_nemo_${var}.namelist 
+$SOSIEDIR/sosie3.x -f 3_initcd_${sourceid}_to_nemo_${var}.namelist 
 
