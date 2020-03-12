@@ -1,42 +1,23 @@
 '''
-Script to create pelagic initial conditions from variety of sources for ACCORD domain
+Script to compile pelagic initial conditions from variety of sources into a single file, with some quality checks, for the ACCORD domain
 '''
 
-import pmlpy
 import netCDF4
 import numpy as np
-import glob
-import os.path
 
-##########################
-# Create File
-##########################
-cdlfile = '/home/n01/n01/dapa/code/python/pmlpy/cdl/nemo_ini_trc.cdl'
-outfile = 'accord_bgc_ini.nc'
-
-
-if os.path.isfile(outfile):
-    nco = netCDF4.Dataset(outfile,'a')
-else:
-    nc = netCDF4.Dataset('domain_cfg_ORCA12_adj.nc')
-    nco = pmlpy.ncgen.create_file(outfile,cdlfile,nc.dimensions['x'].size, \
-            nc.dimensions['y'].size,nc.dimensions['z'].size,title='ACCORD ICs')
-    nco.variables['nav_lon'][:] = nc.variables['nav_lon'][:]
-    nco.variables['nav_lat'][:] = nc.variables['nav_lat'][:]
-    nc.close()
-
-x = nco.dimensions['x'].size
-y = nco.dimensions['y'].size
-z = nco.dimensions['z'].size
-
-nc = netCDF4.Dataset('ACCORD_density.nc')
+#Load Density
+nc = netCDF4.Dataset('density.nc')
 dens = np.squeeze(nc.variables['rhop'][:])
 nc.close()
+
+outfile = 'bgc_ini.nc'
+nco = netCDF4.Dataset(outfile,'a')
 
 ##########################
 # Set Nutrients + Oxygen
 # Source - WOA18
 ##########################
+print('Compiling pelagic variables into '+outfile)
 
 # Nitrate
 print('Nitrate')
@@ -46,6 +27,7 @@ dat[dat<0] = 0
 nco.variables['TRNN3_n'][:] = dat
 nco.sync()
 nci.close()
+_,z,y,x = dat.shape
 
 # Phosphate
 print('Phosphate')
@@ -100,7 +82,6 @@ nci.close()
 # Set Light Attenuation
 # Source - PML
 ##########################
-
 print('ADY') 
 nci = netCDF4.Dataset('ady/TRNlight_ADY_ady-SEAsia_IC.nc')
 dat = nci.variables['TRNlight_ADY'][0,:]

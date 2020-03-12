@@ -7,7 +7,7 @@ import numpy as np
 ##########################
 # Create/Open File
 ##########################
-outfile = 'accord_bgc_ini.nc'
+outfile = 'bgc_ini.nc'
 nco = netCDF4.Dataset(outfile,'a')
 
 pf = 'fabm_st2Dn'

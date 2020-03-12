@@ -1,6 +1,7 @@
 import fileinput
 import os
 import re
+import sys
 
 def create_namelists(template_dir,dat):
     templates = ['1_initcd_source_to_source_var.namelist.template',
@@ -29,28 +30,15 @@ data = {
         'SZVAR':'depth',
         'TARGETID': 'SEAsia',
         'TAG': 'IC',
-        'DOMAIN': 'domain_cfg_ORCA12_adj.nc'
+        'DOMAIN': 'domain_cfg.nc'
        }
 
-vars = {'o_an': {'SFILE': 'woa18_oxygen_extracted_mean.nc',
+vars = {'o_an': {'SFILE': 'woa18_oxy_extracted_mean.nc',
                'VARL': 'Oxygen',
                'OVAR': 'TRNO2_o',
                'SCALE': '1.0'
                }}
-     
-t = 'snr' if data['STIMEVAR']=='missing_rec' else data['STIMEVAR']
 
-interp_dir='/work/n01/n01/dapa/INTERP/BGC/interp-files'
-domain_file='/work/n01/n01/dapa/INTERP/BGC/'+data['DOMAIN']
-
-#LINK TO FILES
-os.system('ln -s {}/interp*.sh .'.format(interp_dir))
-os.system('ln -s {} .'.format(domain_file))
-
-for i,v in enumerate(vars):
-    create_namelists(interp_dir+'/namelist-templates/',{'VAR':v, **data, **vars[v]})
-    
-    if i == 0:
-        os.system('sh ./interp_main.sh {} {} {} {}'.format(v, vars[v]['SFILE'], data['SOURCEID'], t))
-    else:
-        os.system('sh ./interp_additional.sh {} {} {}'.format(v, vars[v]['SFILE'], data['SOURCEID']))
+v = 'o_an'
+create_namelists(sys.argv[1],{'VAR':v, **data, **vars[v]})
+os.system('sh ./interp_IC_initial.sh {} {} {} {}'.format(v, vars[v]['SFILE'], data['SOURCEID'], data['STIMEVAR']))

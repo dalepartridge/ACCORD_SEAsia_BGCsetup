@@ -1,4 +1,7 @@
 #Load modules
+module unload cray-netcdf-hdf5parallel cray-hdf5-parallel
+module load cray-netcdf cray-hdf5
+module load nco/4.5.0
 module load anaconda/python3
 
 #####################
@@ -24,4 +27,8 @@ conda remove -n ndep_env --all
 # LIGHT ABSORPTION
 #####################
 
-
+cd $WDIR/SBC/ady/
+ln -s $RAWDATA/SBC/ady/adyBroadBandClimatology.8days.filled.nc .
+ln -s $DOMAINFILE domain_cfg.nc
+ln -s $TOOLS/interp-files/interp_IC_initial.sh .
+python interp_ady.py $TOOLS/interp-files/namelist-templates/

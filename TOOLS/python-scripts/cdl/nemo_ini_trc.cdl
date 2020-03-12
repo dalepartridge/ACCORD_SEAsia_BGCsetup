@@ -5,15 +5,9 @@ dimensions:
 	z = 51 ;
 	t = UNLIMITED ; // (1 currently)
 variables:
-	double kt ;
-		kt:long_name = "number of time steps" ;
-		kt:units = "1" ;
 	double time_counter(t) ;
 		time_counter:long_name = "number of time steps" ;
 		time_counter:units = "1" ;
-	double rdttrc1 ;
-		rdttrc1:long_name = "time step" ;
-		rdttrc1:units = "s" ;
 	float nav_lat(y, x) ;
 		nav_lat:long_name = "latitude" ;
 		nav_lat:units = "degrees_north" ;
@@ -23,9 +17,6 @@ variables:
 	float nav_lev(z) ;
 		nav_lev:long_name = "vertical levels" ;
 		nav_lev:units = "1" ;
-	double adatrj ;
-		adatrj:long_name = "days since the beginning of the run" ;
-		adatrj:units = "d" ;
 	double TRNP1_c(t, z, y, x) ;
 		TRNP1_c:long_name = "diatom carbon" ;
 		TRNP1_c:units = "mg/m3" ;
