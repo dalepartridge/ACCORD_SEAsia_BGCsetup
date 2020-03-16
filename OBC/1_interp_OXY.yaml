@@ -1,0 +1,6 @@
+njobs: 8
+varname: OXY
+method: linear
+meshfilename: mesh_mask.nc
+inputfilename: hadgem/OXY.nc
+outputfilename: hadgem/OXY_interp.nc

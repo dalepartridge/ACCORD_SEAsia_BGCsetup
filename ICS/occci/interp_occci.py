@@ -34,7 +34,7 @@ data = {
         'DOMAIN': 'domain_cfg.nc'
        }
 
-vars = {'chlor_a': {'SFILE': 'CCI-OC_chla_extracted_jan_mean.nc',
+vars = {'chlor_a': {'SFILE': 'CCI-OC_chla.nc',
                  'VARL': 'Total Chlorophyll-a Concentration',
                  'OVAR': 'TRNChl_Tot',
                  'SCALE': '1.0'

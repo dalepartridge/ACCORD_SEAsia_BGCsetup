@@ -34,7 +34,7 @@ data = {
         'DOMAIN': 'domain_cfg.nc'
        }
 
-vars = {'ady': {'SFILE': 'adyBroadBandClimatology_ACCORD_extracted.nc',
+vars = {'ady': {'SFILE': 'adyBroadBandClimatology.nc',
                  'VARL': 'Light Attenuation',
                  'OVAR': 'TRNlight_ADY',
                  'SCALE': '1.0'

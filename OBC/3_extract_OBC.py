@@ -543,7 +543,7 @@ if __name__=='__main__':
     if len(sys.argv)>1:
         conf_filename=sys.argv[1]
     else:
-        conf_filename='3_BDY_extract_config.yaml'
+        conf_filename='3_extract_OBC.yaml'
     conf_file=open(conf_filename)
     print ('reading configuration from '+conf_filename)
     Yconfiguration=Y.load(conf_file)

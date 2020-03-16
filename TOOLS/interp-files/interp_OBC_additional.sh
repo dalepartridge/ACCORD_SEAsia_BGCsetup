@@ -12,7 +12,8 @@ sfile=$2     #Source file
 sourceid=$3  #Source ID Tag
 
 # Fill land mask with zeros
-ncatted -a _FillValue,$var,m,f,0 $sfile
+#ncatted -a _FillValue,$var,m,f,0 $sfile
+python fill_land_mask.py ALK.nc ALK
 
 #Fill land values
 $SOSIEDIR/sosie3.x -f 1_initcd_${sourceid}_to_${sourceid}_${var}.namelist 
@@ -29,7 +30,7 @@ ncrcat init_split* initcd_${var}.nc
 rm -rf split* init_split*
 
 # Fill values
-sed -i "88 ccf_z_src   = \'bdy_depths.nc\'" 3_initcd_${sourceid}_to_nemo_${var}.namelist
+sed -i "88 ccf_z_src   = \'bdy_gdept.nc\'" 3_initcd_${sourceid}_to_nemo_${var}.namelist
 sed -i "89 ccv_z_src   = \'gdept\'" 3_initcd_${sourceid}_to_nemo_${var}.namelist
 $SOSIEDIR/sosie3.x -f 3_initcd_${sourceid}_to_nemo_${var}.namelist 
 

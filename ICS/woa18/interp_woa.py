@@ -33,17 +33,17 @@ data = {
         'DOMAIN': 'domain_cfg.nc'
        }
 
-vars = {'n_an': {'SFILE': 'woa18_nitrate_extracted_mean.nc',
+vars = {'n_an': {'SFILE': 'woa18_nitrate.nc',
                'VARL': 'Nitrate',
                'OVAR': 'TRNN3_n',
                'SCALE': '1.0'
                },   
-        'i_an': {'SFILE': 'woa18_silicate_extracted_mean.nc',
+        'i_an': {'SFILE': 'woa18_silicate.nc',
                'VARL': 'Silicate',
                'OVAR': 'TRNN5_s',
                'SCALE': '1.0'
                },   
-        'p_an': {'SFILE': 'woa18_phosphate_extracted_mean.nc',
+        'p_an': {'SFILE': 'woa18_phosphate.nc',
                'VARL': 'Phosphate',
                'OVAR': 'TRNN1_p',
                'SCALE': '1.0'

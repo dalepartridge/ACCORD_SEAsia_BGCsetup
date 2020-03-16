@@ -1,0 +1,6 @@
+njobs: 8
+varname: DIN
+method: linear
+meshfilename: mesh_mask.nc
+inputfilename: hadgem/DIN.nc
+outputfilename: hadgem/DIN_interp.nc

@@ -33,7 +33,7 @@ data = {
         'DOMAIN': 'domain_cfg.nc'
        }
 
-vars = {'o_an': {'SFILE': 'woa18_oxy_extracted_mean.nc',
+vars = {'o_an': {'SFILE': 'woa18_oxygen.nc',
                'VARL': 'Oxygen',
                'OVAR': 'TRNO2_o',
                'SCALE': '1.0'

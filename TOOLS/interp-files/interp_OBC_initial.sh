@@ -12,7 +12,8 @@ sourceid=$3  #Source ID Tag
 stime=$4     #Source time variable
 
 # Fill land mask with zeros
-ncatted -a _FillValue,$var,m,f,0 $sfile
+#ncatted -a _FillValue,$var,m,f,0 $sfile
+python fill_land_mask.py ALK.nc ALK
 
 #Create mask file
 ncks -d ${stime},0,0,1 -v $var ${sfile} ${sourceid}_mask.nc
@@ -23,7 +24,7 @@ ncap2 -O -s 'where(mask>0) mask=1' ${sourceid}_mask.nc ${sourceid}_mask.nc
 #Fill land values
 $SOSIEDIR/sosie3.x -f 1_initcd_${sourceid}_to_${sourceid}_${var}.namelist 
 
-ncks -d ${stime},0,0,1 ${var}_${sourceid}-${sourceid}_IC.nc ${var}_${sourceid}-${sourceid}_IC_extract.nc
+#ncks -d ${stime},0,0,1 ${var}_${sourceid}-${sourceid}_IC.nc ${var}_${sourceid}-${sourceid}_IC_extract.nc
 
 # Create weights
 $SCRIPDIR/scripgrid.exe 2_${sourceid}_weights_${var}.namelist # creates datagrid_file and nemogrid_file
@@ -45,7 +46,7 @@ ncrename -v $var,mask sosie_initcd_mask.nc
 ncap2 -O -s 'where(mask>=0) mask=1' sosie_initcd_mask.nc sosie_initcd_mask.nc
 
 # Fill values
-sed -i "88 ccf_z_src   = \'bdy_depths.nc\'" 3_initcd_${sourceid}_to_nemo_${var}.namelist 
+sed -i "88 ccf_z_src   = \'bdy_gdept.nc\'" 3_initcd_${sourceid}_to_nemo_${var}.namelist 
 sed -i "89 ccv_z_src   = \'gdept\'" 3_initcd_${sourceid}_to_nemo_${var}.namelist 
 $SOSIEDIR/sosie3.x -f 3_initcd_${sourceid}_to_nemo_${var}.namelist 
 

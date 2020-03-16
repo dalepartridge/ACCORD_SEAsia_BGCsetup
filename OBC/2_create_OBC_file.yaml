@@ -1,7 +1,7 @@
 ystart: 1980
 yend: 2100
-coords_file: /data/sthenno1/scratch/dapa/ACCORD/bdy/hadgem-coordinates/coordinates.bdy.nc
-output_folder: /data/sthenno1/scratch/dapa/ACCORD/bdy/hadgem-data
+coords_file: coordinates.bdy.nc
+output_folder: bdyfiles
 monthly: True
 files:
   accord_bdytrc:
@@ -12,42 +12,42 @@ files:
     variables:
         nitrate:
             depth: 75
-            units: mmolN m-3
-            short_name: nitrate
-            long_name: nitrate
+            units: "mmolN m-3"
+            short_name: "nitrate"
+            long_name: "nitrate"
         phosphate:
             depth: 75
-            units: mmolP m-3
-            short_name: phosphate
-            long_name: phospate
+            units: "mmolP m-3"
+            short_name: "phosphate"
+            long_name: "phospate"
         silicate:
             depth: 75
-            units: mmolSi m-3
-            short_name: silicate
-            long_name: silicate
+            units: "mmolSi m-3"
+            short_name: "silicate"
+            long_name: "silicate"
         DIC:
             depth: 75
-            units: mmolC m-3
-            short_name: DIC
+            units: "mmolC m-3"
+            short_name: "DIC"
             long_name: "dissolvd inorganic carbon"
         TA:
             depth: 75
-            units: mmol m-3
-            short_name: totalk
+            units: "mmol m-3"
+            short_name: "totalk"
             long_name: "Total Alkalinity"
         oxygen:
             depth: 75
-            units: mmolO m-3
+            units: "mmolO m-3"
             short_name: "oxygen"
             long_name: "oxygen"
         R2_c:
             depth: 75
-            units: mgC m-3
+            units: "mgC m-3"
             long_name: "semi-labile Dissolved Organic Carbon"
             short_name: "semi-labile DOC"
         R3_c:
             depth: 75
-            units: mgC m-3
+            units: "mgC m-3"
             long_name: "semi-refractory Dissolved Organic Carbon"
             short_name: "semi-refractory DOC"
         diatoms_n:

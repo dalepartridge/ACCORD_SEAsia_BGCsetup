@@ -33,12 +33,12 @@ data = {
         'DOMAIN': 'domain_cfg.nc'
        }
 
-vars = {'TAlk': {'SFILE': 'GLODAP_TAlk_extracted.nc',
+vars = {'TAlk': {'SFILE': 'GLODAP_TAlk.nc',
                  'VARL': 'Total Alkalinity',
                  'OVAR': 'TRNO3_bioalk',
                  'SCALE': '1.0'
                 },
-        'TCO2': {'SFILE': 'GLODAP_TCO2_extracted.nc',
+        'TCO2': {'SFILE': 'GLODAP_TCO2.nc',
                  'VARL': 'DIC',
                  'OVAR': 'TRNO3_c',
                  'SCALE': '1.0'

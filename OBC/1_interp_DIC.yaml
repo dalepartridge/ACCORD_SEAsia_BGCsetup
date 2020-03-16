@@ -1,0 +1,6 @@
+njobs: 8
+varname: DIC
+method: linear
+meshfilename: mesh_mask.nc
+inputfilename: hadgem/DIC.nc
+outputfilename: hadgem/DIC_interp.nc

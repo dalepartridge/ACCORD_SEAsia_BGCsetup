@@ -1,0 +1,6 @@
+njobs: 8
+varname: SIL
+method: linear
+meshfilename: mesh_mask.nc
+inputfilename: hadgem/SIL.nc
+outputfilename: hadgem/SIL_interp.nc

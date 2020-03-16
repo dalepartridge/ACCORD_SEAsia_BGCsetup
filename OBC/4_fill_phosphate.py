@@ -3,7 +3,7 @@ import glob
 from seapy.progressbar import progress
 import numpy as np
 
-files = glob.glob('hadgem-data/accord_bdytrc*.nc')
+files = glob.glob('bdyfiles/accord_bdytrc*.nc')
 
 for f in progress(files):
     nc = netCDF4.Dataset(f,'a')
