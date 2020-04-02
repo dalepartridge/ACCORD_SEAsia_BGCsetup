@@ -21,6 +21,8 @@ for v in vars:
     dat.units = v['attr']['units']
     dat.long_name = v['attr']['long_name']
 
+nco.createVariable('kt','double',{})
+
 nco.author = os.getenv('USER')
 nco.history = dt.datetime.now().strftime("Created on %a, %B %d, %Y at %H:%M")
 nco.title = 'Nemo initial conditions'
@@ -29,4 +31,5 @@ nco.title = 'Nemo initial conditions'
 nco.variables['time_counter'][:] = 1
 nco.variables['nav_lat'][:] = lat
 nco.variables['nav_lon'][:] = lon
+nco.variables['nav_lev'][:] = z
 nco.close()
