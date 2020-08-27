@@ -228,7 +228,7 @@ ctype_z_trg= 'z'
 &ninterp
 cmethod  = 'bilin'
 idrown   = 300,0,.false.
-l_save_drwn = .true.
+l_save_drwn = .false.
 ismooth   = 0
 jt1       = 0
 jt2       = 0

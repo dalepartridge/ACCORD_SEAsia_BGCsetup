@@ -1,11 +1,10 @@
 import netCDF4
 import glob
-from seapy.progressbar import progress
 import numpy as np
 
 files = glob.glob('bdyfiles/accord_bdytrc*.nc')
 
-for f in progress(files):
+for f in files:
     nc = netCDF4.Dataset(f,'a')
     v = nc.variables['nitrate'][:]
     for i in range(75):

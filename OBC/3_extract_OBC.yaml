@@ -6,19 +6,19 @@ njobs: 8
 grid: T
 variables:
    NO3:
-       ESM_file: hadgem/DIN_hadgem-SEAsia_OBC.nc
+       input_file: hadgem/DIN_hadgem-SEAsia_OBC.nc
        output_file: bdyfiles/accord_bdytrc
    O2:
-       ESM_file: hadgem/OXY_hadgem-SEAsia_OBC.nc 
+       input_file: hadgem/OXY_hadgem-SEAsia_OBC.nc 
        output_file: bdyfiles/accord_bdytrc
    Si:
-       ESM_file: hadgem/SIL_hadgem-SEAsia_OBC.nc
+       input_file: hadgem/SIL_hadgem-SEAsia_OBC.nc
        output_file: bdyfiles/accord_bdytrc
    DIC:
-       ESM_file: hadgem/DIC_hadgem-SEAsia_OBC.nc
+       input_file: hadgem/DIC_hadgem-SEAsia_OBC.nc
        output_file: bdyfiles/accord_bdytrc
    TA: 
-       ESM_file: hadgem/ALK_hadgem-SEAsia_OBC.nc
+       input_file: hadgem/ALK_hadgem-SEAsia_OBC.nc
        output_file: bdyfiles/accord_bdytrc
    R2_c:
        output_file: bdyfiles/accord_bdytrc

@@ -1,6 +1,0 @@
-njobs: 8
-varname: ALK
-method: linear
-meshfilename: mesh_mask.nc
-inputfilename: hadgem/ALK.nc
-outputfilename: hadgem/ALK_interp.nc

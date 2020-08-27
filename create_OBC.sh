@@ -9,10 +9,10 @@ cd $WDIR/OBC/
 . 1_interp.sh
 
 mkdir bdyfiles
-ln -s $RAWDATA/DOMAIN/coordinates.bdy.nc .
+ln -s $RAWDATA/DOMAIN-HADGEM/coordinates.bdy.nc .
 python 2_create_OBC_file.py
 
-ln -s $RAWDATA/DOMAIN/bdy_gdept.nc .
+ln -s $RAWDATA/DOMAIN-HADGEM/bdy_gdept.nc .
 python 3_extract_OBC.py
 
 python 4_fill_phosphate.py

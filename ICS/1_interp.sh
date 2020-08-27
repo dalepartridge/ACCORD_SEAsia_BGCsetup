@@ -16,7 +16,7 @@ cd ..
 # WOA18-OXYGEN
 ###############
 cd woa18-oxy
-ln -s $RAWDATA/ICS/woa18_oxy_extracted_mean.nc woa18-oxygen.nc
+ln -s $RAWDATA/ICS/woa18_oxy_extracted_mean.nc woa18_oxygen.nc
 ln -s $DOMAINFILE domain_cfg.nc
 ln -s $TOOLS/interp-files/interp_IC_initial.sh .
 python interp_woaoxy.py $TOOLS/interp-files/namelist-templates/
