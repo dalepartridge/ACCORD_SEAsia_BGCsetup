@@ -68,6 +68,9 @@ def extract_values(BDY,varfile,varname,scaling=1.,bias=0.,fill_mask=False):
     fvar=DS(varfile)
     if 'lev' in fvar.variables.keys():
         zvar='lev'
+    if 'nav_lev' in fvar.variables.keys():
+        zvar='nav_lev'
+        zdim='z'
     elif 'depth' in fvar.variables.keys():
         zvar='depth'
     else: 
@@ -77,28 +80,22 @@ def extract_values(BDY,varfile,varname,scaling=1.,bias=0.,fill_mask=False):
     #extract variable
     # if the length of the time dimension is big (i.e. monthly), then extract data one timstep at time to save memory
     print ('extracting values for '+varname)
-    if len(fvar.dimensions['time'])<300:
-        tmp_var=fvar.variables[varname][:].squeeze()
-        if len(tmp_var.shape)==3: tmp_var=array([tmp_var]) #this is to add a fictional temporal dimension in case of the variable has only one time record (long term climatological mean)
-        if zvar!='': var=tmp_var[:,:,BDY['nbj'],BDY['nbi']]*scaling-bias  #this is to extract main variables that are not depth resolved, like ssh
-        else: var=tmp_var[:,BDY['nbj'],BDY['nbi']]*scaling-bias
+    timelen=len(fvar.dimensions['time_counter'])
+    if zvar!='':
+        nlev=len(fvar.dimensions[zdim])
+        var=zeros((timelen,nlev,BDY['nbj'].size))
     else:
-        timelen=len(fvar.dimensions['time'])
+        var=zeros((timelen,BDY['nbj'].size))
+    print ('given the big size the extraction is one timestep at time')
+    print ('this might take few minutes')
+    for time in range(timelen):
+        tmp_var=fvar.variables[varname][time]
         if zvar!='':
-            nlev=len(fvar.dimensions[zvar])
-            var=zeros((timelen,nlev,BDY['nbj'].size))
+            var[time]=tmp_var[:,BDY['nbj'],BDY['nbi']]*scaling-bias
         else:
-            var=zeros((timelen,BDY['nbj'].size))
-        print ('given the big size the extraction is one timestep at time')
-        print ('this might take few minutes')
-        for time in range(timelen):
-            tmp_var=fvar.variables[varname][time]
-            if zvar!='':
-                var[time]=tmp_var[:,BDY['nbj'],BDY['nbi']]*scaling-bias
-            else:
-                var[time]=tmp_var[BDY['nbj'],BDY['nbi']]*scaling-bias
-            if mod(time,50)==0:
-                print ('%4i out of %4i'%(time,timelen))
+            var[time]=tmp_var[BDY['nbj'],BDY['nbi']]*scaling-bias
+        if mod(time,50)==0:
+            print ('%4i out of %4i'%(time,timelen))
             
     # extract depth information
     if zvar!='':
@@ -108,18 +105,6 @@ def extract_values(BDY,varfile,varname,scaling=1.,bias=0.,fill_mask=False):
     fvar.close()
     return var,original_depth
     
-def depth_interpolation(variable,original_depth,new_depth):
-    # this function linearly interpolates all layer in the depth point of the AMM boundary
-    # variable is the original 3D array (time,depth, position)
-    # original_depth is the depth in the original variable
-    # new depths are taken from the class attribute  bdy_depth
-    var_interpolated=zeros((variable.shape[0],new_depth.shape[0],variable.shape[2]))
-    #this put a flag where the script extrapolate at depth 
-    for position in range(variable.shape[2]):
-        interpolator=interp1d(original_depth,variable[:,:,position],axis=1,bounds_error=False,fill_value=(variable[:,0,position],variable[:,-1,position]))
-        var_interpolated[:,:,position]=interpolator(new_depth[:,position])
-    return var_interpolated
-
 def write_bdy(var_to_write,ncname,varname,y0=1960,y1=2099):
     # this write the BDY in a NEMO netcdf BDY file
     count=0
@@ -163,7 +148,7 @@ if __name__=='__main__':
     grid=Yconfiguration['grid']
     variables=Yconfiguration['variables']
     
-    infile_dict={'TA':'ALK', 'DIC':'DIC' ,'O2':'OXY', 'NO3':'DIN', 'Si': 'SIL'}  
+    infile_dict={'PO4':'PO4', 'O2':'OXY', 'NO3':'NO3', 'Si': 'SIL'}  
     out_dict={'TA': 'TA', 'NH4':'ammonium','NO3':'nitrate','PO4':'phosphate','Si':'silicate','temp':'votemper','sal':'vosaline','O2':'oxygen','DIC':'DIC','bioalk':'bioalk','uo':'vozocrtx','vo':'vomecrty','ssh':'sossheig','small_pon':'small_pon','large_poc':'large_poc','calcite_c':'calcite_c','R3_c':'R3_c','nanophytoplankton_Chl':'nanophytoplankton_Chl','small_pop':'small_pop','R2_c':'R2_c','picophytoplankton_n':'picophytoplankton_n','microphytoplankton_p':'microphytoplankton_p','picophytoplankton_c':'picophytoplankton_c','microphytoplankton_c':'microphytoplankton_c','medium_pos': 'medium_pos','microphytoplankton_n':'microphytoplankton_n','picophytoplankton_p':'picophytoplankton_p','nanophytoplankton_p':'nanophytoplankton_p','large_pop':'large_pop','large_pos':'large_pos','diatoms_p':'diatoms_p','diatoms_s':'diatoms_s','diatoms_n':'diatoms_n','microphytoplankton_Chl':'microphytoplankton_Chl','large_pon':'large_pon','small_poc':'small_poc','nanophytoplankton_n':'nanophytoplankton_n','medium_poc':'medium_poc','medium_pon':'medium_pon','nanophytoplankton_c':'nanophytoplankton_c','picophytoplankton_Chl':'picophytoplankton_Chl','diatoms_c':'diatoms_c','diatoms_Chl':'diatoms_Chl','medium_pop': 'medium_pop'}
     
     #here the information about themetadata are read and sotred tin the BDY dictionnary
@@ -190,8 +175,7 @@ if __name__=='__main__':
         elif 'input_file' in var_keys.keys():
             # extract the BGC variable from the reference dataset
             print ('Extracting field from %s'%var_keys['input_file'])
-            input_val,input_depth=extract_values(BDY,var_keys['input_file'],infile_dict[varname])
-            output_val=depth_interpolation(input_val,input_depth_depth,BDY['depth'])
+            output_val,input_depth=extract_values(BDY,var_keys['input_file'],infile_dict[varname])
             
             #save the boundary in the appropriate files
             outfile=var_keys['output_file']

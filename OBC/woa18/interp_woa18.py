@@ -2,10 +2,9 @@ import fileinput
 import os
 import re
 import sys
-import fill_mask
 
 def create_namelists(template_dir,dat):
-    templates = ['1_initcd_source_to_source_var_irregular.namelist.template',
+    templates = ['1_initcd_source_to_source_var.namelist.template',
                  '2_source_weights_var.namelist.template',
                  '3_initcd_source_to_nemo_var.namelist.template']
     namelists = ['1_{}_to_{}_{}.namelist'.format(dat['SOURCEID'],dat['SOURCEID'],dat['VAR']),
@@ -24,39 +23,29 @@ def create_namelists(template_dir,dat):
     return
 
 data = {
-        'SOURCEID':'hadgem',
-        'STIMEVAR':'time_average_1mo',
-        'SLONVAR':'nav_lon',
-        'SLATVAR':'nav_lat',
-        'SZVAR':'deptht',
+        'SOURCEID':'woa18',
+        'STIMEVAR':'time',
+        'SLONVAR':'lon',
+        'SLATVAR':'lat',
+        'SZVAR':'depth',
         'TARGETID': 'SEAsia',
         'TAG': 'OBC',
         'DOMAIN': 'domain_cfg.nc'
        }
 
-vars = {'SIL': {'SFILE': 'SIL.nc',
+vars = {'i_an': {'SFILE': 'ext_woa18_silicate.nc',
                'VARL': 'Silicate',
                'OVAR': 'SIL',
                'SCALE': '1.0'
                },   
-        'ALK': {'SFILE': 'ALK.nc',
-               'VARL': 'Alkalinity',
-               'OVAR': 'ALK',
+        'n_an': {'SFILE': 'ext_woa18_nitrate.nc',
+               'VARL': 'Nitrate',
+               'OVAR': 'NO3',
                'SCALE': '1.0'
                },   
-        'DIC': {'SFILE': 'DIC.nc',
-               'VARL': 'Dissolved Inorganic Carbon',
-               'OVAR': 'DIC',
-               'SCALE': '1.0'
-               },   
-        'DIN': {'SFILE': 'DIN.nc',
-               'VARL': 'Dissolved Inorganic Nitrogen',
-               'OVAR': 'DIN',
-               'SCALE': '1.0'
-               },   
-        'OXY': {'SFILE': 'OXY.nc',
-               'VARL': 'Oxygen',
-               'OVAR': 'OXY',
+        'p_an': {'SFILE': 'ext_woa18_phosphate.nc',
+               'VARL': 'Phosphate',
+               'OVAR': 'PO4',
                'SCALE': '1.0'
                }}
 

@@ -1,25 +1,28 @@
 meshfile: bdy_gdept.nc
 coordsfile: coordinates.bdy.nc
-y0: 1980
-y1: 2099
+y0: 2017
+y1: 2017
 njobs: 8
 grid: T
 variables:
    NO3:
-       input_file: hadgem/DIN_hadgem-SEAsia_OBC.nc
+       input_file: woa18/NO3_woa18-SEAsia_OBC.nc
        output_file: bdyfiles/accord_bdytrc
    O2:
-       input_file: hadgem/OXY_hadgem-SEAsia_OBC.nc 
+       input_file: woa18-oxy/OXY_woa18-SEAsia_OBC.nc 
        output_file: bdyfiles/accord_bdytrc
    Si:
-       input_file: hadgem/SIL_hadgem-SEAsia_OBC.nc
+       input_file: woa18/SIL_woa18-SEAsia_OBC.nc
+       output_file: bdyfiles/accord_bdytrc
+   PO4:
+       input_file: woa18/PO4_woa18-SEAsia_OBC.nc
        output_file: bdyfiles/accord_bdytrc
    DIC:
-       input_file: hadgem/DIC_hadgem-SEAsia_OBC.nc
        output_file: bdyfiles/accord_bdytrc
+       fixed_value: 2000.
    TA: 
-       input_file: hadgem/ALK_hadgem-SEAsia_OBC.nc
        output_file: bdyfiles/accord_bdytrc
+       fixed_value: 2400.
    R2_c:
        output_file: bdyfiles/accord_bdytrc
        fixed_value: 60.

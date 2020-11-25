@@ -16,7 +16,7 @@ python fill_mask.py $sfile $var ${sourceid}_mask.nc
 #Fill land values
 $SOSIEDIR/sosie3.x -f 1_${sourceid}_to_${sourceid}_${var}.namelist 
 
-python fix_first_record.py ${var}_${sourceid}-${sourceid}_OBC.nc $var
+#python fix_first_record.py ${var}_${sourceid}-${sourceid}_OBC.nc $var
 
 # Split file into individual files for each time record
 cdo splitsel,1 ${var}_${sourceid}-${sourceid}_OBC.nc split_
@@ -30,7 +30,7 @@ ncrcat init_split* initcd_${var}.nc
 rm -rf split* init_split*
 
 # Fill values
-sed -i "88 ccf_z_src   = \'bdy_gdept.nc\'" 3_${sourceid}_to_nemo_${var}.namelist
-sed -i "89 ccv_z_src   = \'gdept\'" 3_${sourceid}_to_nemo_${var}.namelist
+sed -i "153 ccf_z_trg   = \'bdy_gdept.nc\'" 3_${sourceid}_to_nemo_${var}.namelist
+sed -i "154 ccv_z_trg   = \'gdept\'" 3_${sourceid}_to_nemo_${var}.namelist
 $SOSIEDIR/sosie3.x -f 3_${sourceid}_to_nemo_${var}.namelist 
 

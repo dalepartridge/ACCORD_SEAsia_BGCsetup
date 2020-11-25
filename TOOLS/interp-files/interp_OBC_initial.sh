@@ -14,8 +14,8 @@ stime=$4     #Source time variable
 #Create mask file
 ncks -d ${stime},0,0,1 -v $var ${sfile} ${sourceid}_mask.nc
 ncrename -v $var,mask ${sourceid}_mask.nc
-ncatted -a _FillValue,,d,, ${sourceid}_mask.nc
 ncap2 -O -s 'where(mask>0) mask=1' ${sourceid}_mask.nc ${sourceid}_mask.nc
+ncatted -a _FillValue,mask,m,d,0 ${sourceid}_mask.nc
 
 python fill_mask.py $sfile $var ${sourceid}_mask.nc
 
@@ -25,7 +25,6 @@ $SOSIEDIR/sosie3.x -f 1_${sourceid}_to_${sourceid}_${var}.namelist
 # Create weights
 $SCRIPDIR/scripgrid.exe 2_${sourceid}_weights_${var}.namelist # creates datagrid_file and nemogrid_file
 $SCRIPDIR/scrip.exe 2_${sourceid}_weights_${var}.namelist
-
 cdo splitsel,1 ${var}_${sourceid}-${sourceid}_OBC.nc split_
 for f in split* 
 do
@@ -42,7 +41,7 @@ ncrename -v $var,mask sosie_initcd_mask.nc
 ncap2 -O -s 'where(mask>=0) mask=1' sosie_initcd_mask.nc sosie_initcd_mask.nc
 
 # Fill values
-sed -i "88 ccf_z_src   = \'bdy_gdept.nc\'" 3_${sourceid}_to_nemo_${var}.namelist 
-sed -i "89 ccv_z_src   = \'gdept\'" 3_${sourceid}_to_nemo_${var}.namelist 
+sed -i "153 ccf_z_trg   = \'bdy_gdept.nc\'" 3_${sourceid}_to_nemo_${var}.namelist 
+sed -i "154 ccv_z_trg   = \'gdept\'" 3_${sourceid}_to_nemo_${var}.namelist 
 $SOSIEDIR/sosie3.x -f 3_${sourceid}_to_nemo_${var}.namelist 
 
