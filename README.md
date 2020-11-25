@@ -17,7 +17,7 @@ Create the initial conditions using data from:
 ## Lateral Boundary Condtions
 *create_OBC.sh*  
 
-Create OBC conditions using model data from HadGEM (Downscaled 0.25 degree simulation of CMIP RCP8.5 run containing monthly averages of nitrate, silicate, oxygen, TAlk and DIC), https://doi.org/10.1002/2015JC011167
+Create OBC conditions using data from montly climatology files from World Ocean Atlas for phosphate, silicate, nitrate and oxygen. https://www.nodc.noaa.gov/OC5/woa18/  
 
 
 ## Surface Conditions
