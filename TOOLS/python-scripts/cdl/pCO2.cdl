@@ -1,0 +1,17 @@
+netcdf AMM7-pCO2a_y2000 {
+dimensions:
+	x = 297 ;
+	y = 375 ;
+	t = UNLIMITED ; // (12 currently)
+variables:
+	double pCO2a(t, y, x) ;
+		string pCO2a:long_name = "atmospheric partial pressure of CO2" ;
+		string pCO2a:units = "ppm" ;
+	double t(t) ;
+		string t:long_name = "atmospheric partial pressure of CO2" ;
+		string t:units = "days since 1970-01-01 00:00:00" ;
+
+// global attributes:
+		string :title = "Atmospheric partial pressure of CO2 over AMM7 domain." ;
+		string :comment = "Taken from global averages of CO2 partial pressure over marine surface sites, provided by the Earth System Research Laboratory of NOAA (www.esrl.noaa.gov/gmd/ccgg/trends/global.html)." ;
+}
