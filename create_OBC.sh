@@ -22,8 +22,9 @@ python 4_clean_data.py
 . 5_add_gdep.sh
 
 cd bdyfiles
-for i in *.nc; do;
-cp $i ${a/2017/2018}
+for i in *.nc; do
+cp $i ${i/2017/2018}
+done
 cp accord_bdytrc_y2017m01.nc accord_bdytrc_y2016m12.nc
 cp accord_bdytrc_y2018m12.nc accord_bdytrc_y2019m01.nc
 cd $WDIR
